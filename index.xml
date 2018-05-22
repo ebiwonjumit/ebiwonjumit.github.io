@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Oluwatito Ebiwonjumi</title>
+    <link>ebiwonjumit.github.io/</link>
+    <description>Recent content on Oluwatito Ebiwonjumi</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 21 May 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="ebiwonjumit.github.io/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Building a Lexical Analyzer in Java</title>
+      <link>ebiwonjumit.github.io/post/programlang1/</link>
+      <pubDate>Mon, 21 May 2018 00:00:00 +0000</pubDate>
+      
+      <guid>ebiwonjumit.github.io/post/programlang1/</guid>
+      <description>Building Your Own Programming Language: Part 1 If you are a computer geek like me, building your own programming language is probably on your bucket list. In this post I will go through the first steps in building a programming language.
+Interpreter or Compiler The first hurdle that we need to overcome in our quest to build a programming language is to decide whether we would like the language to be interpreted or compiled.</description>
+    </item>
+    
+    <item>
+      <title>Hello</title>
+      <link>ebiwonjumit.github.io/about/</link>
+      <pubDate>Mon, 17 Jul 2017 11:28:02 -0500</pubDate>
+      
+      <guid>ebiwonjumit.github.io/about/</guid>
+      <description>Introduction I started my journey into the world of Computer Science on May 14, 2016. I had just finished all requirements for senior year and I decided to try and learn something new with all of my spare time. At first, I thought programming was only for the brightest minds of the world so I didn&amp;rsquo;t expect to learn much or even enjoy it. Then I stumbled upon a fun website codeacademy.</description>
+    </item>
+    
+  </channel>
+</rss>
