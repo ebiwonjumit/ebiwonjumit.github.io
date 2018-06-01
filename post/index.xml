@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Posts on Oluwatito Ebiwonjumi</title>
-    <link>/post/</link>
+    <link>ebiwonjumit.github.io/post/</link>
     <description>Recent content in Posts on Oluwatito Ebiwonjumi</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Mon, 21 May 2018 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="ebiwonjumit.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Building a Lexical Analyzer in Java</title>
-      <link>/post/programlang1/</link>
+      <link>ebiwonjumit.github.io/post/programlang1/</link>
       <pubDate>Mon, 21 May 2018 00:00:00 +0000</pubDate>
       
-      <guid>/post/programlang1/</guid>
+      <guid>ebiwonjumit.github.io/post/programlang1/</guid>
       <description>Building Your Own Programming Language: Part 1 If you are a computer geek like me, building your own programming language is probably on your bucket list. In this post I will go through the first steps in building a programming language.
 Interpreter or Compiler The first hurdle that we need to overcome in our quest to build a programming language is to decide whether we would like the language to be interpreted or compiled.</description>
     </item>

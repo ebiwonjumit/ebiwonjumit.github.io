@@ -13,10 +13,10 @@
     
     <item>
       <title>Building a Lexical Analyzer in Java</title>
-      <link>ebiwonjumit.github.io/posts/programlang1/</link>
+      <link>ebiwonjumit.github.io/post/programlang1/</link>
       <pubDate>Mon, 21 May 2018 00:00:00 +0000</pubDate>
       
-      <guid>ebiwonjumit.github.io/posts/programlang1/</guid>
+      <guid>ebiwonjumit.github.io/post/programlang1/</guid>
       <description>Building Your Own Programming Language: Part 1 If you are a computer geek like me, building your own programming language is probably on your bucket list. In this post I will go through the first steps in building a programming language.
 Interpreter or Compiler The first hurdle that we need to overcome in our quest to build a programming language is to decide whether we would like the language to be interpreted or compiled.</description>
     </item>
