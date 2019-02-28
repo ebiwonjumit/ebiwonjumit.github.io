@@ -179,8 +179,7 @@ Java has about three different ways to read files. I chose to use the FileReader
        }
 </code></pre>
 
-<p>I created a method named readFile that takes in the name of the file that contains the source code of the programming language and returns a string with all the content. The code above is not fully mine, I made a lot of changes to fit my needs but I need to acknowledge that I did not create it without outside help. I have included the link to my original source at the bottom.
-In this post, I do not go through creating the rules and syntax for the programming language because anyone trying to build their own language should work on that by themselves.</p>
+<p>I created a method named readFile that takes in the name of the file that contains the source code of the programming language and returns a string with all the content. In this post, I do not go through creating the rules and syntax for the programming language because anyone trying to build their own language should work on that by themselves.</p>
 
 <h4 id="my-lexical-analyzer-tokens">My Lexical Analyzer: Tokens</h4>
 
@@ -239,7 +238,7 @@ public class Token {
 }
 </code></pre>
 
-<p>My token class has a constructor that takes two parameters. A string value and a TokenType that I created within the Token class using Java&rsquo;s enum. Like I said previously, every word or character that we need our parser to understand must be tokenized. The TokenType class has every token that I need, and since the amount and types of tokens will not change I used Java&rsquo;s enum. For those of you that have never used the enum before it allows you to create a class with predefined parameters. The TokenType class I created will not take any other parameters than the ones I defined. The get and set methods are needed so that the class variables can be accessed outside the class. If you havent noticed yet the TokenTypes are defined using regular expressions. I am not qualified to explain regular expression, so I have attached the video I watched that helped me understand them. Obviously you could define your TokenType without regular expressions, I just found that using regular expressions was much better than any other method.</p>
+<p>My token class has a constructor that takes two parameters. A string value and a TokenType that I created within the Token class using Java&rsquo;s enum. Like I said previously, every word or character that we need our parser to understand must be tokenized. The TokenType class has every token that I need, and since the amount and types of tokens will not change I used Java&rsquo;s enum. For those of you that have never used the enum before it allows you to create a class with predefined parameters. The TokenType class I created will not take any other parameters than the ones I defined. The get and set methods are needed so that the class variables can be accessed outside the class. If you haven&rsquo;t noticed yet the TokenTypes are defined using regular expressions. Obviously you could define your TokenType without regular expressions, I just found that using regular expressions was much easier than any other method.</p>
 
 <h4 id="my-lexical-analyzer-lexer">My Lexical Analyzer: Lexer</h4>
 
@@ -321,11 +320,11 @@ public static ArrayList&lt;Token&gt; lexer (String input)
         }
 </code></pre>
 
-<p>(As you can see a lot of if statements, not very good practice my professors would be mad.)When the String is input into the method, we create an ArrayList of Tokens. Then using the stringBuffer and regex matching we check the input string and every time it matches one of our TokenTypes we add the new token to the ArrayList. Since I never intended for the language to be whitespace sensitive we do not add the whitespace token to the ArrayList, but if we were creating a lexer for a language like Python then whitespace would be important and need to be tokenized.</p>
+<p>(As you can see a lot of if statements, not very good, my professors would be mad!) When the String is input into the method, we create an ArrayList of Tokens. Then using the stringBuffer and regex matching we check the input string and every time it matches one of our TokenTypes we add the new token to the ArrayList. Since I never intended for the language to be whitespace sensitive we do not add the whitespace token to the ArrayList, but if we were creating a lexer for a language like Python then whitespace would be important and need to be tokenized.</p>
 
 <h4 id="till-next-time">Till Next Time</h4>
 
-<p>Well I built the whole lexical analyzer in about two days, so I do not believe it should be much a pain. I hope I was able to be helpful on your journey to create your own programming language. Next time we will be building a Parser, so stay tuned!</p>
+<p>Well I built the whole lexical analyzer in about two days, so I do not believe it should be much of a pain. I hope I was able to be helpful on your journey to create your own programming language. Next time we will be building a Parser, so stay tuned!</p>
 
             </div>
             
@@ -333,7 +332,7 @@ public static ArrayList&lt;Token&gt; lexer (String input)
             <div class="push"></div>
         </div>
         <footer class="footer text-center">
-<p>Copyright &copy; 2018 Oluwatito Ebiwonjumi -
+<p>Copyright &copy; 2019 Oluwatito Ebiwonjumi -
 <span class="credit">
 	Powered by 
 	<a target="_blank" href="https://gohugo.io">Hugo</a>
