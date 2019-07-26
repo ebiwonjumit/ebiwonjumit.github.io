@@ -14,7 +14,7 @@ body {
 }
 
 #green-terminal {
-	color: #ff0000;
+	color: #FFFFFF;
 }
 
 .font-header {
@@ -61,7 +61,7 @@ h1,h2,h3,h4,h5,h6 {
 
 i {
 	margin: 10px 20px 10px 20px;
-	color: #333;
+	color: #000;
 }
 
 .post-link {
