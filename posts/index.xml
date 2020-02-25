@@ -1,22 +1,22 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Posts on Oluwatito Ebiwonjumi</title>
-    <link>ebiwonjumit.github.io/posts/</link>
-    <description>Recent content in Posts on Oluwatito Ebiwonjumi</description>
+    <title>Posts on Tito Ebiwonjumi</title>
+    <link>https://www.titoebiwonjumi.net/posts/</link>
+    <description>Recent content in Posts on Tito Ebiwonjumi</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
+    <language>en</language>
     <lastBuildDate>Mon, 21 May 2018 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="ebiwonjumit.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://www.titoebiwonjumi.net/posts/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Building a Lexical Analyzer in Java</title>
-      <link>ebiwonjumit.github.io/posts/programlang1/</link>
+      <link>https://www.titoebiwonjumi.net/posts/programlang1/</link>
       <pubDate>Mon, 21 May 2018 00:00:00 +0000</pubDate>
       
-      <guid>ebiwonjumit.github.io/posts/programlang1/</guid>
+      <guid>https://www.titoebiwonjumi.net/posts/programlang1/</guid>
       <description>Building Your Own Programming Language: Part 1 If you are a computer geek like me, building your own programming language is probably on your bucket list. In this post I will go through the first steps in building a programming language.
 Interpreter or Compiler The first hurdle that we need to overcome in our quest to build a programming language is to decide whether we would like the language to be interpreted or compiled.</description>
     </item>
