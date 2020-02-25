@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="author" content="Oluwatito Ebiwonjumi">
+    <meta name="description" content="Tito Ebiwonjmi&#39;s personal website">
+    <meta name="keywords" content="blog,developer,personal">
+
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Building a Lexical Analyzer in Java"/>
+<meta name="twitter:description" content="Building Your Own Programming Language: Part 1 If you are a computer geek like me, building your own programming language is probably on your bucket list. In this post I will go through the first steps in building a programming language.
+Interpreter or Compiler The first hurdle that we need to overcome in our quest to build a programming language is to decide whether we would like the language to be interpreted or compiled."/>
+
+    <meta property="og:title" content="Building a Lexical Analyzer in Java" />
+<meta property="og:description" content="Building Your Own Programming Language: Part 1 If you are a computer geek like me, building your own programming language is probably on your bucket list. In this post I will go through the first steps in building a programming language.
+Interpreter or Compiler The first hurdle that we need to overcome in our quest to build a programming language is to decide whether we would like the language to be interpreted or compiled." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.titoebiwonjumi.net/posts/programlang1/" />
+<meta property="article:published_time" content="2018-05-21T00:00:00+00:00" />
+<meta property="article:modified_time" content="2018-05-21T00:00:00+00:00" />
+
+
+    
+      <base href="https://www.titoebiwonjumi.net/posts/programlang1/">
+    
+    <title>
+  Building a Lexical Analyzer in Java · Tito Ebiwonjumi
+</title>
+
+    
+      <link rel="canonical" href="https://www.titoebiwonjumi.net/posts/programlang1/">
+    
+
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700%7CMerriweather:300,700%7CSource+Code+Pro:400,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css" integrity="sha384-KA6wR/X5RY4zFAHpv/CnoG2UW1uogYfdnP67Uv7eULvTveboZJg0qUpmJZb5VqzN" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" integrity="sha256-l85OmPOjvil/SOvVt3HnSSjzF1TUMyT9eV0c2BzEGzU=" crossorigin="anonymous" />
+
+    
+      
+      
+      <link rel="stylesheet" href="https://www.titoebiwonjumi.net/css/coder.min.a4f332213a21ce8eb521670c614470c58923aaaf385e2a73982c31dd7642decb.css" integrity="sha256-pPMyITohzo61IWcMYURwxYkjqq84XipzmCwx3XZC3ss=" crossorigin="anonymous" media="screen" />
+    
+
+    
+
+    
+      
+        
+        
+        <link rel="stylesheet" href="https://www.titoebiwonjumi.net/css/coder-dark.min.83a2010dac9f59f943b3004cd6c4f230507ad036da635d3621401d42ec4e2835.css" integrity="sha256-g6IBDayfWflDswBM1sTyMFB60DbaY102IUAdQuxOKDU=" crossorigin="anonymous" media="screen" />
+      
+    
+
+    
+
+    
+
+    
+
+    <link rel="icon" type="image/png" href="https://www.titoebiwonjumi.net/images/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="https://www.titoebiwonjumi.net/images/favicon-16x16.png" sizes="16x16">
+
+    <meta name="generator" content="Hugo 0.65.3" />
+  </head>
+
+  
+  
+    
+  
+  <body class="colorscheme-dark">
+    <main class="wrapper">
+      <nav class="navigation">
+  <section class="container">
+    <a class="navigation-title" href="https://www.titoebiwonjumi.net/">
+      Tito Ebiwonjumi
+    </a>
+    
+    <input type="checkbox" id="menu-toggle" />
+    <label class="menu-button float-right" for="menu-toggle"><i class="fas fa-bars"></i></label>
+    <ul class="navigation-list">
+      
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="https://www.titoebiwonjumi.net/about/">About</a>
+          </li>
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="https://www.titoebiwonjumi.net/posts/">Posts</a>
+          </li>
+        
+      
+      
+        
+        
+        
+          
+        
+          
+            
+              <li class="navigation-item menu-separator">
+                <span>|</span>
+              </li>
+              
+            
+            <li class="navigation-item">
+              <a href="https://www.titoebiwonjumi.net/es/">Español</a>
+            </li>
+          
+        
+      
+    </ul>
+    
+  </section>
+</nav>
+
+
+      <div class="content">
+        
+  <section class="container post">
+    <article>
+      <header>
+        <div class="post-title">
+          <h1 class="title">Building a Lexical Analyzer in Java</h1>
+        </div>
+        <div class="post-meta">
+          <div class="date">
+            <span class="posted-on">
+              <i class="fas fa-calendar"></i>
+              <time datetime='2018-05-21T00:00:00Z'>
+                May 21, 2018
+              </time>
+            </span>
+            <span class="reading-time">
+              <i class="fas fa-clock"></i>
+              7-minute read
+            </span>
+          </div>
+          
+          
+        </div>
+      </header>
+
+      <div>
+        
+        <h2 id="building-your-own-programming-language-part-1">Building Your Own Programming Language: Part 1</h2>
+<p>If you are a computer geek like me, building your own programming language is probably on your bucket list.
+In this post I will go through the first steps in building a programming language.</p>
+<h4 id="interpreter-or-compiler">Interpreter or Compiler</h4>
+<p>The first hurdle that we need to overcome in our quest to build a programming language is to decide whether we would like the language to be interpreted or compiled. What&rsquo;s the difference?
+An interpreter is a program that takes in source code and then executes it (does an action).
+A compiler is a program that takes in source code and then translates it into machine language.
+These are very basic definitions of the two concepts. The way I truly understood the difference was by realizing that anyone building a compiler would need to understand machine language and algorithms and a lot of very complex computer science. Whereas, someone building an interpreter just needs to know how to program.
+Is the difference clearer? Well for my language I decided to build an interpreter because I did not care about speed and optimization, I just wanted to have a working programming language. I will probably build a compiler in the future.</p>
+<h4 id="parts-of-an-interpreter">Parts of an Interpreter</h4>
+<ul>
+<li>Lexical Analyzer (Tokenizer)</li>
+<li>Parser</li>
+<li>Evaluator</li>
+<li>Printer</li>
+</ul>
+<p>I chose to build my interpreter in Java, because it is the language that I am most comfortable. You can apply these concepts to any language.</p>
+<h4 id="lexical-analyzer">Lexical Analyzer</h4>
+<p>The lexical analyzer takes the source code and creates tokens.
+Example</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">[BinaryOperator, /]
+
+</code></pre></div><p>It is the tokens that we feed into our parser. Think about your favorite programming language, in my case Java.
+Every word or character of significance is a token. Take a look at the code below.</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">int num = 10;
+Boolean name = True;
+
+</code></pre></div><p>We would want our lexer (short for lexical analyzer) to create a token for each important word or character for our parser to understand. The exact implementation is up to the developer and how they want the work flow of their programming language to be.
+Looking at the Java code above, here is an example of the tokens that we would want our lexer to produce.</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">[Keyword, int]
+[Variable, num]
+[Assign, =]
+[Number, 10]
+[Semicolon, ;]
+[Keyword, Boolean]
+[Variable, name]
+[Assign, =]
+[BooleanOperator, True]
+[Semicolon, ;]
+</code></pre></div><p>Obviously there is more than one way to create a lexer, so the tokens might look slightly different but in the end it should still yield the same result.</p>
+<h4 id="my-lexical-analyzer-readfile">My Lexical Analyzer: readFile</h4>
+<p>It took me about two days to build the lexer.
+The first thing that I had to figure out was how to read a file.
+Java has about three different ways to read files. I chose to use the FileReader and BufferReader because it allowed me to read the whole file at once. Here is my example:</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">private static String readFile (String filename){
+
+           // The name of the file to open.
+           String fileName = filename;
+
+           // This will reference one line at a time
+           String line = null;
+           String result = &#34;&#34;;
+           StringBuffer stringBuffer = new StringBuffer();
+
+           try {
+               // FileReader reads text files in the default encoding.
+               FileReader fileReader =
+                       new FileReader(fileName);
+
+               // Always wrap FileReader in BufferedReader.
+               BufferedReader bufferedReader =
+                       new BufferedReader(fileReader);
+
+               while ((line = bufferedReader.readLine()) != null) {
+                   stringBuffer.append(line).append(&#34;\n&#34;);
+                   result = stringBuffer.toString();
+               }
+
+               // Always close files.
+               bufferedReader.close();
+           } catch (FileNotFoundException ex) {
+               System.out.println(
+                       &#34;Unable to open file &#39;&#34; +
+                               fileName + &#34;&#39;&#34;);
+           } catch (IOException ex) {
+               System.out.println(
+                       &#34;Error reading file &#39;&#34;
+                               + fileName + &#34;&#39;&#34;);
+               // Or we could just do this:
+               // ex.printStackTrace();
+           }
+           return result;
+       }
+</code></pre></div><p>I created a method named readFile that takes in the name of the file that contains the source code of the programming language and returns a string with all the content. In this post, I do not go through creating the rules and syntax for the programming language because anyone trying to build their own language should work on that by themselves.</p>
+<h4 id="my-lexical-analyzer-tokens">My Lexical Analyzer: Tokens</h4>
+<p>Once we have read the file, the next step is to create the lexer that will produce the tokens for the words and characters. I decided to create a token class. Here is my example:</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">import java.util.*;
+public class Token {
+    protected TokenType type;
+    protected String value;
+
+    public Token(TokenType type, String value) {
+        this.type = type;
+        this.value = value;
+    }
+
+    public String toString() {
+        return String.format(&#34;(%s %s)&#34;, this.type.name(), this.value);
+    }
+
+    public TokenType getTokenType() {
+        return this.type;
+    }
+
+    public void setTokenType(TokenType type) {
+        this.type = type;
+    }
+
+    public String getValue() {
+        return this.value;
+    }
+
+    public void setValue(String value) {
+        this.value = value;
+    }
+
+    public static enum TokenType {
+        PRINT(&#34;(print)&#34;),
+        ASSIGN(&#34;[ \t\f\r\n]{1}(=)&#34;),
+        NAME(&#34;([a-zA-Z_]+)&#34;),
+        BOOLOP(&#34;(True)|(False)&#34;),
+        LOGICALOP(&#34;(&amp;&amp;)|[!|||]&#34;),
+        RELATIONOP(&#34;(!=)|(&gt;=)|(&lt;=)|[=|&lt;|&gt;]&#34;),
+        NUMBER(&#34;-?[0-9]+&#34;),
+        BINARYOP(&#34;[-|+|*|/|%]&#34;),
+        WHITESPACE(&#34;[ \t\f\r\n]+&#34;),
+        COLON(&#34;[:]&#34;),
+        SEMICOLON(&#34;[;]&#34;);
+
+        public String pattern;
+
+        private TokenType(String pattern) {
+            this.pattern = pattern;
+        }
+
+    }
+}
+</code></pre></div><p>My token class has a constructor that takes two parameters. A string value and a TokenType that I created within the Token class using Java&rsquo;s enum. Like I said previously, every word or character that we need our parser to understand must be tokenized. The TokenType class has every token that I need, and since the amount and types of tokens will not change I used Java&rsquo;s enum. For those of you that have never used the enum before it allows you to create a class with predefined parameters. The TokenType class I created will not take any other parameters than the ones I defined. The get and set methods are needed so that the class variables can be accessed outside the class. If you haven&rsquo;t noticed yet the TokenTypes are defined using regular expressions. Obviously you could define your TokenType without regular expressions, I just found that using regular expressions was much easier than any other method.</p>
+<h4 id="my-lexical-analyzer-lexer">My Lexical Analyzer: Lexer</h4>
+<p>Now that we have made the skeletons for the tokens, we know need to create a way to identify and export the tokens. Remember the readFile method we created, go back to that file and we will create another method called lexer. Our method will return an ArrayList of Tokens and take a String input. Here is my example:</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">import java.util.regex.*;
+import java.io.*;
+
+public static ArrayList&lt;Token&gt; lexer (String input)
+        {   //Tokens to return
+            ArrayList&lt;Token&gt; tokens = new ArrayList&lt;Token&gt;();
+
+            // Lexer logic begins here
+            StringBuffer tokenPatternsBuffer = new StringBuffer();
+            for (Token.Type tokenType : Token.Type.values())
+                tokenPatternsBuffer.append(String.format(&#34;|(?&lt;%s&gt;%s)&#34;, tokenType.name(), tokenType.pattern));
+            Pattern tokenPatterns = Pattern.compile(new String(tokenPatternsBuffer.substring(1)));
+
+            // Begin matching tokens
+            Matcher matcher = tokenPatterns.matcher(input);
+            while (matcher.find()) {
+                if (matcher.group(Token.Type.NUMBER.name()) != null)
+                {
+                    tokens.add(new Token(Token.Type.NUMBER, matcher.group(Token.Type.NUMBER.name())));
+                    continue;
+                }
+                else if (matcher.group(Token.Type.BINARYOP.name()) != null)
+                {
+                    tokens.add(new Token(Token.Type.BINARYOP, matcher.group(Token.Type.BINARYOP.name())));
+                    continue;
+                }
+                else if (matcher.group(Token.Type.RELATIONOP.name()) != null)
+                {
+                    tokens.add(new Token(Token.Type.RELATIONOP, matcher.group(Token.Type.RELATIONOP.name())));
+                    continue;
+                }
+                else if (matcher.group(Token.Type.LOGICALOP.name()) != null)
+                {
+                    tokens.add(new Token(Token.Type.LOGICALOP, matcher.group(Token.Type.LOGICALOP.name())));
+                    continue;
+                }
+                else if (matcher.group(Token.Type.BOOLOP.name()) != null)
+                {
+                    tokens.add(new Token(Token.Type.BOOLOP, matcher.group(Token.Type.BOOLOP.name())));
+                    continue;
+                }
+
+                else if (matcher.group(Token.Type.ASSIGN.name()) != null)
+                {
+                    tokens.add(new Token(Token.Type.ASSIGN, matcher.group(Token.Type.ASSIGN.name())));
+                    continue;
+                }
+                else if (matcher.group(Token.Type.PRINT.name()) != null)
+                {
+                    tokens.add(new Token(Token.Type.PRINT, matcher.group(Token.Type.PRINT.name())));
+                    continue;
+                }
+                else if (matcher.group(Token.Type.SEMICOLON.name()) != null)
+                {
+                    tokens.add(new Token(Token.Type.SEMICOLON, matcher.group(Token.Type.SEMICOLON.name())));
+                    continue;
+                }
+                else if (matcher.group(Token.Type.COLON.name()) != null)
+                {
+                    tokens.add(new Token(Token.Type.COLON, matcher.group(Token.Type.COLON.name())));
+                    continue;
+                }
+                else if (matcher.group(Token.Type.NAME.name()) != null)
+                {
+                    tokens.add(new Token(Token.Type.NAME, matcher.group(Token.Type.NAME.name())));
+                    continue;
+                }
+                else if (matcher.group(Token.Type.WHITESPACE.name()) != null)
+                    continue;
+            }
+
+
+            return tokens;
+        }
+</code></pre></div><p>(As you can see a lot of if statements, not very good, my professors would be mad!) When the String is input into the method, we create an ArrayList of Tokens. Then using the stringBuffer and regex matching we check the input string and every time it matches one of our TokenTypes we add the new token to the ArrayList. Since I never intended for the language to be whitespace sensitive we do not add the whitespace token to the ArrayList, but if we were creating a lexer for a language like Python then whitespace would be important and need to be tokenized.</p>
+<h4 id="till-next-time">Till Next Time</h4>
+<p>Well I built the whole lexical analyzer in about two days, so I do not believe it should be much of a pain. I hope I was able to be helpful on your journey to create your own programming language.</p>
+
+      </div>
+
+
+      <footer>
+        
+
+
+        <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "yourdiscussshortname" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+        
+        
+      </footer>
+    </article>
+
+    
+  </section>
+
+      </div>
+
+      <footer class="footer">
+  <section class="container">
+    
+    
+    
+    
+  </section>
+</footer>
+
+    </main>
+
+    
+
+    <script>
+(function(f, a, t, h, o, m){
+	a[h]=a[h]||function(){
+		(a[h].q=a[h].q||[]).push(arguments)
+	};
+	o=f.createElement('script'),
+	m=f.getElementsByTagName('script')[0];
+	o.async=1; o.src=t; o.id='fathom-script';
+	m.parentNode.insertBefore(o,m)
+})(document, window, '//analytics.example.com/tracker.js', 'fathom');
+fathom('set', 'siteId', 'ABCDE');
+fathom('trackPageview');
+</script>
+
+
+  </body>
+
+</html>
